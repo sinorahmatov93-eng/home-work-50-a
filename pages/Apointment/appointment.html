@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mecare — Appointment</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: { extend: {
+      fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+      colors: { brand: { DEFAULT: '#3dbfa5', dark: '#0f3b36', soft: '#e8f7f3' } }
+    } }
+  }
+</script>
+</head>
+<body class="font-sans text-slate-800 bg-white antialiased">
+
+<header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="#" class="flex items-center gap-2 font-bold text-lg">
+      <span class="w-8 h-8 rounded-lg bg-brand text-white grid place-items-center text-sm">M</span> Mecare
+    </a>
+    <nav class="hidden md:flex gap-8 text-sm text-slate-600">
+      <a href="#" class="hover:text-brand">Home</a>
+      <a href="#" class="hover:text-brand">Services</a>
+      <a href="#" class="hover:text-brand">Doctors</a>
+      <a href="#" class="hover:text-brand">Pricing</a>
+    </nav>
+    <div class="hidden md:flex items-center gap-4 text-sm">
+      <a href="#" class="text-slate-600 hover:text-brand">Join Online</a>
+      <a href="#book" class="bg-brand text-white px-4 py-2 rounded-full hover:bg-brand-dark transition">Get Appointment</a>
+    </div>
+    <button id="menuBtn" class="md:hidden p-2" aria-label="Menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="hidden md:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-3 text-sm">
+    <a href="#" class="block">Home</a>
+    <a href="#" class="block">Services</a>
+    <a href="#" class="block">Doctors</a>
+    <a href="#" class="block">Pricing</a>
+    <a href="#book" class="block bg-brand text-white text-center py-2 rounded-full">Get Appointment</a>
+  </div>
+</header>
+
+<section id="book" class="max-w-6xl mx-auto px-4 py-12 grid lg:grid-cols-2 gap-10 items-start">
+  <div>
+    <h1 class="text-3xl sm:text-5xl font-bold text-[#0b1f3a] leading-tight">Schedule Your Appointment with us</h1>
+    <p class="mt-4 text-sm text-slate-600 max-w-md">Book your appointment today and take the first step towards better health. We&rsquo;ll get back to you quickly.</p>
+    <ul class="mt-8 space-y-6 max-w-sm"><li class="flex gap-3"><span class="mt-0.5 w-8 h-8 shrink-0 rounded-lg bg-brand-soft text-brand grid place-items-center text-sm">🗓</span><div><b class="text-sm text-brand-dark">Convenient Scheduling</b><p class="text-xs text-slate-500 mt-0.5">Pick a date and time that works for you, with easy rescheduling.</p></div></li><li class="flex gap-3"><span class="mt-0.5 w-8 h-8 shrink-0 rounded-lg bg-brand-soft text-brand grid place-items-center text-sm">⚡</span><div><b class="text-sm text-brand-dark">Early Admission Services</b><p class="text-xs text-slate-500 mt-0.5">Skip the wait with priority check-in and fast admission.</p></div></li><li class="flex gap-3"><span class="mt-0.5 w-8 h-8 shrink-0 rounded-lg bg-brand-soft text-brand grid place-items-center text-sm">⏱</span><div><b class="text-sm text-brand-dark">Timely Consultations</b><p class="text-xs text-slate-500 mt-0.5">Get consultations when you need them, in person or online.</p></div></li><li class="flex gap-3"><span class="mt-0.5 w-8 h-8 shrink-0 rounded-lg bg-brand-soft text-brand grid place-items-center text-sm">💬</span><div><b class="text-sm text-brand-dark">Ongoing Support</b><p class="text-xs text-slate-500 mt-0.5">Our team follows up after every visit to keep you on track.</p></div></li></ul>
+  </div>
+
+  <form id="appointmentForm" novalidate class="bg-white border border-slate-100 rounded-2xl shadow-sm p-5 sm:p-6 space-y-4">
+    <div>
+      <label for="service" class="block text-xs font-medium text-slate-700 mb-1">Select Appointment <span class="text-rose-500">*</span></label>
+      <select required id="service" name="service" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand">
+        <option value="">Select Service</option><option>Cardiology</option><option>Endocrinology</option><option>Neurology</option><option>Eye care</option><option>Dental</option><option>Orthopedics</option>
+      </select>
+      <p class="err hidden mt-1 text-[11px] text-rose-500"></p>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div><label for="first" class="block text-xs font-medium text-slate-700 mb-1">First Name <span class=text-rose-500>*</span></label><input required id="first" name="first" type="text" placeholder="John" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+      <div><label for="last" class="block text-xs font-medium text-slate-700 mb-1">Last Name <span class=text-rose-500>*</span></label><input required id="last" name="last" type="text" placeholder="Doe" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div><label for="email" class="block text-xs font-medium text-slate-700 mb-1">Your Email <span class=text-rose-500>*</span></label><input required id="email" name="email" type="email" placeholder="you@example.com" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+      <div><label for="phone" class="block text-xs font-medium text-slate-700 mb-1">Phone Number <span class=text-rose-500>*</span></label><input required id="phone" name="phone" type="tel" placeholder="+1 234 567 890" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+    </div>
+    <div class="grid sm:grid-cols-2 gap-4">
+      <div><label for="date" class="block text-xs font-medium text-slate-700 mb-1">Appointment Date <span class=text-rose-500>*</span></label><input required id="date" name="date" type="date" placeholder="" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+      <div><label for="age" class="block text-xs font-medium text-slate-700 mb-1">Age</label><input id="age" name="age" type="number" placeholder="25" class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand"><p class="err hidden mt-1 text-[11px] text-rose-500"></p></div>
+    </div>
+    <fieldset>
+      <legend class="block text-xs font-medium text-slate-700 mb-1">Sex</legend>
+      <div class="flex gap-5 text-sm">
+        <label class="inline-flex items-center gap-2"><input type="radio" name="sex" value="Male" checked class="accent-[#3dbfa5]"> Male</label>
+        <label class="inline-flex items-center gap-2"><input type="radio" name="sex" value="Female" class="accent-[#3dbfa5]"> Female</label>
+        <label class="inline-flex items-center gap-2"><input type="radio" name="sex" value="Other" class="accent-[#3dbfa5]"> Other</label>
+      </div>
+    </fieldset>
+    <div>
+      <label for="message" class="block text-xs font-medium text-slate-700 mb-1">Message</label>
+      <textarea id="message" name="message" rows="4" maxlength="300" placeholder="Tell us how we can help..." class="w-full border border-slate-200 rounded-lg px-3 py-2.5 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-brand resize-none"></textarea>
+      <p class="text-right text-[11px] text-slate-400 mt-1"><span id="count">0</span>/300</p>
+    </div>
+    <button type="submit" class="bg-brand text-white px-8 py-2.5 rounded-full text-sm font-medium hover:bg-brand-dark transition">Submit</button>
+    <p id="ok" class="hidden rounded-lg bg-brand-soft text-brand-dark text-sm p-3" role="status"></p>
+  </form>
+</section>
+
+<section id="cta" class="max-w-6xl mx-auto px-4 py-10">
+  <div class="relative overflow-hidden rounded-3xl bg-[#6ad3c0] grid md:grid-cols-2 items-center min-h-[18rem]">
+    <div class="relative z-10 p-6 sm:p-10">
+      <h2 class="text-2xl sm:text-4xl font-bold leading-tight text-[#0b1f3a]">Schedule Your Appointment with us</h2>
+      <p class="mt-3 text-sm text-slate-800 max-w-sm">Book a visit in a few steps and get care that fits your schedule.</p>
+      <button id="openBooking" class="mt-6 bg-[#0b1f3a] text-white px-5 py-2 rounded-full text-xs font-medium hover:bg-black transition">Get Started</button>
+    </div>
+    <div class="relative h-72 md:h-full md:min-h-[18rem] overflow-hidden" aria-hidden="true">
+      <div class="absolute top-5 left-[18%] md:left-[47%] -right-10 bg-white rounded-2xl shadow-lg p-3 text-slate-700">
+        <div class="flex items-center justify-between text-[11px] font-semibold"><span>Monday, 19 Aug 2024</span><span class="text-slate-400 pr-12">Today ▾</span></div>
+        <div class="mt-2 rounded-lg bg-brand text-white p-2 text-[10px]"><div class="font-medium">Checkup · Dr. Thomas Lee</div><div class="mt-1 h-1.5 w-2/3 rounded bg-white/60"></div></div>
+        <div class="mt-2 flex gap-2 text-[10px]"><span class="flex-1 rounded-lg bg-[#0b3b36] text-white px-2 py-1.5">Confirmed</span><span class="flex-1 rounded-lg bg-rose-200 text-rose-700 px-2 py-1.5">Reschedule</span></div>
+        <div class="mt-2 rounded-lg bg-sky-100 p-2 text-[10px]"><div class="font-medium">Consultation · 11:30</div><div class="mt-1 h-1.5 w-1/2 rounded bg-sky-300"></div></div>
+      </div>
+      <div class="absolute left-2 md:left-[29%] bottom-6 w-44 bg-white rounded-xl shadow-lg p-3 text-slate-700">
+        <div class="text-[10px] font-semibold mb-2">August 2024</div>
+        <div class="flex flex-wrap gap-1"><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">8</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">9</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">10</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">11</span><span class="w-4 h-4 rounded bg-brand text-white text-[8px] grid place-items-center">12</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">13</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">14</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">15</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">16</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">17</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">18</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">19</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">20</span><span class="w-4 h-4 rounded bg-slate-100 text-[8px] grid place-items-center">21</span></div>
+        <div class="mt-2 h-5 rounded bg-brand-soft"></div>
+      </div>
+      <span class="absolute left-[10%] md:left-[33%] top-6 w-9 h-9 rounded-full bg-white shadow grid place-items-center text-lg">🧑‍⚕️</span>
+      <span class="absolute right-6 bottom-5 w-12 h-12 rounded-full bg-white shadow-lg ring-4 ring-white/50 grid place-items-center text-2xl">👩‍⚕️</span>
+    </div>
+  </div>
+</section>
+
+<footer class="bg-slate-50 border-t border-slate-100 mt-6">
+  <div class="max-w-6xl mx-auto px-4 py-10 grid grid-cols-2 md:grid-cols-4 gap-8 text-sm">
+    <div class="col-span-2 md:col-span-1"><div class="flex items-center gap-2 font-bold"><span class="w-7 h-7 rounded-lg bg-brand text-white grid place-items-center text-xs">M</span> Mecare</div><p class="mt-2 text-xs text-slate-500">Compassionate care, modern medicine.</p></div>
+    <div><b>Solutions</b><ul class="mt-2 space-y-1 text-slate-500 text-xs"><li>Resident Care</li><li>Telemedicine</li><li>Elderly Services</li></ul></div>
+    <div><b>Company</b><ul class="mt-2 space-y-1 text-slate-500 text-xs"><li>About</li><li>Careers</li><li>Contact</li></ul></div>
+    <div><b>Get in Touch</b><ul class="mt-2 space-y-1 text-slate-500 text-xs"><li>+1 234 567 890</li><li>hello@mecare.com</li><li>Follow us online</li></ul></div>
+  </div>
+  <div class="border-t border-slate-200 py-4 text-center text-xs text-slate-400">© 2026 Mecare. All rights reserved.</div>
+</footer>
+
+<script>
+  // Мобильное меню
+  const menu = document.getElementById('mobileMenu');
+  document.getElementById('menuBtn').addEventListener('click', () => menu.classList.toggle('hidden'));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => menu.classList.add('hidden')));
+
+  // Нижний баннер: кнопка прокручивает к форме
+  document.getElementById('openBooking').addEventListener('click', () => {
+    document.getElementById('book').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => document.getElementById('service').focus({ preventScroll: true }), 500);
+  });
+
+  // Форма
+  const form = document.getElementById('appointmentForm');
+  const ok = document.getElementById('ok');
+  const date = document.getElementById('date');
+  date.min = new Date().toISOString().split('T')[0];
+
+  document.getElementById('message').addEventListener('input', e => {
+    document.getElementById('count').textContent = e.target.value.length;
+  });
+
+  function check(el) {
+    const err = el.parentElement.querySelector('.err');
+    let text = '';
+    if (el.required && !el.value.trim()) text = 'This field is required';
+    else if (el.type === 'email' && el.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value)) text = 'Enter a valid email';
+    else if (el.type === 'tel' && el.value && !/^[+\d][\d\s()-]{6,}$/.test(el.value)) text = 'Enter a valid phone number';
+    else if (el.type === 'number' && el.value && (el.value < 0 || el.value > 120)) text = 'Enter a valid age';
+    else if (el.type === 'date' && el.value && el.value < el.min) text = 'Choose a future date';
+    if (err) { err.textContent = text; err.classList.toggle('hidden', !text); }
+    el.classList.toggle('border-rose-400', !!text);
+    return !text;
+  }
+  const fields = [...form.querySelectorAll('input:not([type=radio]), select')];
+  fields.forEach(f => { f.addEventListener('blur', () => check(f)); f.addEventListener('input', () => f.classList.contains('border-rose-400') && check(f)); });
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const valid = fields.map(check).every(Boolean);
+    if (!valid) { form.querySelector('.border-rose-400')?.focus(); return; }
+    const name = document.getElementById('first').value;
+    ok.textContent = `Thank you, ${name}! Your ${document.getElementById('service').value} appointment is booked for ${date.value}. We will contact you shortly.`;
+    ok.classList.remove('hidden');
+    form.reset();
+    document.getElementById('count').textContent = '0';
+    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+</script>
+</body>
+</html>

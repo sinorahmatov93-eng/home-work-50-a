@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - Mocare</title>
+    <!-- Подключаем Tailwind CSS через CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            DEFAULT: '#0d9488',
+                            dark: '#0f766e',
+                            light: '#14b8a6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white text-slate-700 font-sans antialiased flex flex-col min-h-screen">
+
+    <!-- ХЕДЕР -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Логотип -->
+            <div class="flex items-center gap-2">
+                <div class="w-9 h-9 bg-emerald-500 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-md">M</div>
+                <span class="text-xl font-bold tracking-tight text-slate-900">Mocare</span>
+            </div>
+
+            <!-- Десктопное меню -->
+            <nav class="hidden lg:flex items-center gap-3 text-xs font-medium text-slate-600" aria-label="Page navigation">
+                <a href="../../index.html" class="hover:text-emerald-600 transition-colors">Home</a>
+                <a href="../ABOU%20US/index.html" class="hover:text-emerald-600 transition-colors">About Us</a>
+                <a href="../Sign%20in/index.html" class="hover:text-emerald-600 transition-colors">Sign In</a>
+                <a href="../SIgn%20up/index.html" class="hover:text-emerald-600 transition-colors">Sign Up</a>
+                <a href="../Privacy%20policy/index.html" class="hover:text-emerald-600 transition-colors">Privacy</a>
+                <a href="index.html" class="font-extrabold text-emerald-700" aria-current="page">Terms</a>
+                <a href="../Eror/index.html" class="hover:text-emerald-600 transition-colors">Coming Soon</a>
+                <a href="../Error/index.html" class="hover:text-emerald-600 transition-colors">Not Found</a>
+            </nav>
+
+            <!-- Кнопки в шапке -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="#" class="text-sm font-semibold text-slate-700 hover:text-emerald-600 transition-colors">Join Doctor</a>
+                <a href="#" class="bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all">Get Application</a>
+            </div>
+
+            <!-- Мобильная кнопка меню (бургер) -->
+            <button id="menu-toggle" class="lg:hidden p-2 text-slate-600 hover:text-slate-900 focus:outline-none" aria-label="Toggle navigation">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Выпадающее мобильное меню -->
+        <div id="mobile-menu" class="hidden lg:hidden px-4 pt-2 pb-6 border-b border-slate-100 bg-white shadow-lg space-y-3">
+            <a href="../../index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Home</a>
+            <a href="../ABOU%20US/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">About Us</a>
+            <a href="../Sign%20in/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Sign In</a>
+            <a href="../SIgn%20up/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Sign Up</a>
+            <a href="../Privacy%20policy/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Privacy</a>
+            <a href="index.html" class="block py-2 font-extrabold text-emerald-700" aria-current="page">Terms</a>
+            <a href="../Eror/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Coming Soon</a>
+            <a href="../Error/index.html" class="block py-2 text-slate-600 font-medium hover:text-emerald-600">Not Found</a>
+            <div class="pt-4 border-t border-slate-100 flex flex-col gap-3">
+                <a href="#" class="text-center py-2 font-semibold text-slate-700">Join Doctor</a>
+                <a href="#" class="text-center bg-emerald-500 text-white font-semibold py-2.5 rounded-full shadow">Get Application</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ОСНОВНОЙ КОНТЕНТ (Terms of Service) -->
+    <main class="flex-grow max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+        <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-2">Terms of Service</h1>
+        <p class="text-xs text-slate-400 uppercase tracking-wider mb-8">Updated August 28, 2024</p>
+
+        <div class="bg-slate-50 border border-slate-200/60 rounded-xl p-6 mb-10 text-sm text-slate-600">
+            <p class="font-semibold text-slate-800 mb-3">YOUR ATTENTION IS PARTICULARLY DRAWN TO THE PROVISIONS OF:</p>
+            <ul class="list-disc pl-5 space-y-1.5">
+                <li><strong class="text-slate-700">Paragraph 4:</strong> Registration</li>
+                <li><strong class="text-slate-700">Section 5:</strong> Term and Termination (termination of the Service)</li>
+                <li><strong class="text-slate-700">Section 9:</strong> Intellectual Property</li>
+                <li><strong class="text-slate-700">Section 13:</strong> Liability Limits</li>
+                <li><strong class="text-slate-700">Your indemnity obligations</strong></li>
+            </ul>
+        </div>
+
+        <div class="space-y-10 text-slate-600 text-sm md:text-base leading-relaxed">
+            <!-- Блок 1 -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">1. The Terms</h2>
+                <p class="mb-4">
+                    Please read these terms and conditions carefully before you start to use our site. These terms tell you who we are, how we will provide the site to you, how you and we may change or end the contract, what to do if there is a problem and other important information. If you think that there is a mistake in these terms, please contact us to discuss.
+                </p>
+                <p class="mb-4">
+                    These terms are between Mocare and you, either acting in your individual capacity or on behalf of your organization ("you" or "Your"). If you are acting on behalf of your organization, you warrant that you have the authority to bind such organization to these terms. If you do not have such authority, or if you do not agree with these terms, you must not accept these terms and must not use our site. By using our site, you confirm that you accept these terms of use and that you agree to comply with them.
+                </p>
+                <ul class="list-disc pl-5 space-y-2 mb-4">
+                    <li>Our privacy policy (incorporated into this agreement by this reference);</li>
+                    <li>Contractor’s Employer/Independent contractor compliance terms;</li>
+                    <li>User account and security requirements & terms; and</li>
+                    <li>Additional terms for specific features, etc.</li>
+                </ul>
+                <p>
+                    If you do not agree to these terms, you must not use our site. We recommend that you print a copy of these terms for future reference, and we may periodically review and change them governing your access to and use of our site while leaving a copy of this record.
+                </p>
+            </section>
+
+            <!-- Блок 2 -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">2. Information about Mocare</h2>
+                <p>
+                    Mocare analyzes and manages appointments in the context of the medical field, as well as providing channels of medical summary, doctor search, and medical managementing interface allowing users to manage clinics and medical procedures in an efficient, cost-efficient manner.
+                </p>
+            </section>
+
+            <!-- Блок 3 -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">3. Content provided by the User</h2>
+                <p class="mb-4">
+                    Users will be allowed to upload various data, including, but not limited to, text through ChatBot, text and documents, schedule information, schedule details, and data necessary to use Mocare ("User Data"). Users own their User Data. We claim no intellectual property rights over the data you provide to our platform in the framework of the services we provide.
+                </p>
+                <p>
+                    You license us to use the content provided as standard and normal practice, but we retain confidential security, and systems are secure. You grant us the right to store your data and use it for compliance and improvements to the service. We do not share your private data with third parties except as necessary for providing the service or compliance with the law.
+                </p>
+            </section>
+
+            <!-- Блок 4 -->
+            <section>
+                <h2 class="text-xl font-bold text-slate-900 mb-3">4. Registration</h2>
+                <p class="mb-4">
+                    In order to access the service or any part thereof, users will need to register for format of terms of service to operate an account and completely by complying with this result as referred - the relevant registration rules. All personal details will be treated strictly in accordance with the Privacy Policy – disclaimers and legal requirements then applicable in relation to it.
+                </p>
+                <p>
+                    After registering for the service, subject to the terms and protection rules of the service, users can use legal rights to access to and process their data supported by technological safeguards and controls. Users may choose to close their account and data by requesting to delete it through the support or by manually removing it in the active user settings.
+                </p>
+            </section>
+        </div>
+    </main>
+
+    <!-- БЛОК ЗАПИСИ НА ПРИЕМ (Точь-в-точь как на вашем макете) -->
+    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 w-full mb-16">
+        <div class="relative bg-gradient-to-r from-[#4ff0d0] via-[#52e2e7] to-[#7be6ed] rounded-3xl p-8 md:p-12 overflow-hidden shadow-xl flex flex-col lg:flex-row items-center justify-between gap-8">
+            <div class="max-w-xl z-10">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">Schedule Your Appointment with us</h2>
+                <p class="text-slate-800 text-sm md:text-base mb-6 font-medium">
+                    We're here to help! Whether you have questions about our services, need assistance, or simply want to share your information, feel free to reach out.
+                </p>
+                <a href="#" class="inline-block bg-[#111827] hover:bg-black text-white font-medium px-6 py-3.5 rounded-xl shadow-md transition-all">Get Started</a>
+            </div>
+            
+            <!-- Карточка интерфейса расписания с картинки -->
+            <div class="z-10 bg-white/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-white/50 w-full max-w-sm">
+                <div class="flex items-center justify-between mb-4 border-b border-slate-100 pb-3">
+                    <span class="text-xs font-bold text-slate-700">Meeting 29 Aug 2024</span>
+                    <span class="text-xs text-emerald-600 font-semibold flex items-center gap-1 cursor-pointer">📅 Notes</span>
+                </div>
+                <div class="space-y-2.5 text-xs">
+                    <div class="bg-emerald-50/80 p-3 rounded-xl border border-emerald-100 flex justify-between items-center shadow-sm">
+                        <span class="font-semibold text-slate-800">Cardiology Exam</span>
+                        <span class="bg-emerald-500 text-white font-semibold px-2.5 py-1 rounded-md text-[10px]">Active</span>
+                    </div>
+                    <div class="bg-slate-50/60 p-3 rounded-xl flex justify-between items-center text-slate-400">
+                        <span>Medical Form</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ФУТЕР -->
+    <footer class="bg-white border-t border-slate-100 text-sm text-slate-500 pt-12 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Solutions</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">Medical Analytics</a></li>
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">Telehealth Services</a></li>
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">Billing and Coding</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Company</h4>
+                <ul class="space-y-2.5">
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">About us</a></li>
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">Blog</a></li>
+                    <li><a href="#" class="hover:text-emerald-600 transition-colors">Careers</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Get In Touch</h4>
+                <ul class="space-y-2.5">
+                    <li class="flex items-center gap-2">📞 +1 (555) 123-4568</li>
+                    <li class="flex items-center gap-2">✉️ contact@mocare.com</li>
+                    <li class="flex items-center gap-2">📍 123 Health Ave, Suite 100, Pennsylvania 17001</li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold text-slate-900 mb-4">Follow Us On</h4>
+                <div class="flex gap-4 text-slate-600 text-lg">
+                    <a href="#" class="hover:text-emerald-600 transition-colors">in</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">x</a>
+                    <a href="#" class="hover:text-emerald-600 transition-colors">ig</a>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 border-t border-slate-100 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-5 h-5 bg-emerald-500 rounded flex items-center justify-center text-white font-bold text-xs">M</div>
+                <span>© 2024 Mocare, Inc. All rights reserved.</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-emerald-600 transition-colors">Terms of Services</a>
+                <a href="#" class="hover:text-emerald-600 transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JS СКРИПТ ДЛЯ МОБИЛЬНОГО МЕНЮ -->
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>

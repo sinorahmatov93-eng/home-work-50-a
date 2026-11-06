@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your Mocare account to manage your health and stay connected.">
+    <meta name="theme-color" content="#ffffff">
+    <title>Create Your Account | Mocare</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-white font-sans text-slate-900 antialiased">
+    <header class="h-14 border-b border-slate-100 bg-white">
+        <nav class="mx-auto flex h-full max-w-6xl items-center gap-4 overflow-x-auto px-4 text-[11px] font-semibold whitespace-nowrap" aria-label="Page navigation">
+            <a href="../../index.html" class="text-slate-600 hover:text-teal-700">Home</a>
+            <a href="../ABOU%20US/index.html" class="text-slate-600 hover:text-teal-700">About Us</a>
+            <a href="../Sign%20in/index.html" class="text-slate-600 hover:text-teal-700">Sign In</a>
+            <a href="index.html" class="font-extrabold text-emerald-700" aria-current="page">Sign Up</a>
+            <a href="../Privacy%20policy/index.html" class="text-slate-600 hover:text-teal-700">Privacy</a>
+            <a href="../Terms%20of%20services/index.html" class="text-slate-600 hover:text-teal-700">Terms</a>
+            <a href="../Eror/index.html" class="text-slate-600 hover:text-teal-700">Coming Soon</a>
+            <a href="../Error/index.html" class="text-slate-600 hover:text-teal-700">Not Found</a>
+        </nav>
+    </header>
+    <main class="flex min-h-[calc(100vh-3.5rem)] items-center justify-center px-4 py-8 sm:px-8">
+        <div class="grid w-full max-w-[820px] items-center gap-6 md:grid-cols-[1fr_0.9fr] md:gap-16">
+            <section class="mx-auto w-full max-w-[360px] rounded-xl bg-white px-5 py-5 shadow-[0_8px_35px_rgba(15,23,42,0.06)] sm:px-7 sm:py-6" aria-labelledby="signupTitle">
+                <a href="../../index.html" class="mx-auto grid h-8 w-8 place-items-center rounded-lg bg-gradient-to-br from-teal-400 to-emerald-500 text-white shadow-sm" aria-label="Mocare home">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M3 12h4l2-5 4 10 2-5h6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+
+                <h1 id="signupTitle" class="mt-3 text-center text-xl font-extrabold tracking-tight">Create Your Account</h1>
+                <p class="mt-2 text-center text-[11px] leading-5 text-slate-600">Sign up to manage your health and stay connected.</p>
+
+                <form id="signupForm" class="mt-5" novalidate>
+                    <label for="fullName" class="block text-[10px] font-medium text-slate-700">Full Name</label>
+                    <input id="fullName" name="name" type="text" autocomplete="name" placeholder="Esther Howard" required class="mt-1 block h-10 w-full rounded-full border border-slate-200 px-3 text-[11px] text-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-100">
+
+                    <label for="email" class="mt-3 block text-[10px] font-medium text-slate-700">Email</label>
+                    <input id="email" name="email" type="email" autocomplete="email" placeholder="hiphiem@gmail.com" required class="mt-1 block h-10 w-full rounded-full border border-slate-200 px-3 text-[11px] text-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-100">
+
+                    <label for="password" class="mt-3 block text-[10px] font-medium text-slate-700">Password</label>
+                    <div class="relative mt-1">
+                        <input id="password" name="password" type="password" autocomplete="new-password" minlength="8" placeholder="password" required class="block h-10 w-full rounded-full border border-slate-200 px-3 pr-10 text-[11px] text-slate-800 shadow-[0_2px_8px_rgba(15,23,42,0.04)] outline-none transition placeholder:text-slate-400 focus:border-teal-400 focus:ring-2 focus:ring-teal-100">
+                        <button id="togglePassword" type="button" class="absolute inset-y-0 right-0 grid w-10 place-items-center rounded-r-full text-slate-400 hover:text-slate-700" aria-label="Show password" aria-pressed="false">
+                            <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                                <path d="M2.5 12s3.2-6 9.5-6 9.5 6 9.5 6-3.2 6-9.5 6-9.5-6-9.5-6Z"/>
+                                <circle cx="12" cy="12" r="2.5"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="mt-1.5 text-[9px] text-slate-400">Must be at least 8 characters</p>
+
+                    <button type="submit" class="mt-3 h-10 w-full rounded-full bg-slate-900 text-[11px] font-semibold text-white transition hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2">Sign up</button>
+
+                    <div class="my-3 flex items-center gap-3 text-[9px] text-slate-400">
+                        <span class="h-px flex-1 bg-slate-100"></span>
+                        <span>Or Sign up with</span>
+                        <span class="h-px flex-1 bg-slate-100"></span>
+                    </div>
+
+                    <div class="grid gap-2">
+                        <button type="button" data-provider="Google" class="flex h-9 w-full items-center justify-center gap-2 rounded-full border border-slate-200 text-[10px] font-medium text-slate-700 shadow-[0_2px_8px_rgba(15,23,42,0.03)] transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-100">
+                            <svg class="h-3.5 w-3.5" viewBox="0 0 48 48" aria-hidden="true">
+                                <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5Z"/>
+                                <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94a11.05 11.05 0 0 1-4.8 7.24l7.75 6c4.53-4.18 7.09-10.34 7.09-17.71Z"/>
+                                <path fill="#FBBC05" d="M10.53 28.59a14.39 14.39 0 0 1 0-9.18l-7.98-6.19a23.95 23.95 0 0 0 0 21.56l7.98-6.19Z"/>
+                                <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.91-5.77l-7.75-6c-2.15 1.45-4.9 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48Z"/>
+                            </svg>
+                            Sign up with Google
+                        </button>
+                        <button type="button" data-provider="Apple" class="flex h-9 w-full items-center justify-center gap-2 rounded-full border border-slate-200 text-[10px] font-medium text-slate-700 shadow-[0_2px_8px_rgba(15,23,42,0.03)] transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-teal-100">
+                            <svg class="h-3.5 w-3.5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M16.37 12.03c.02 2.12 1.86 2.82 1.88 2.83-.02.05-.29 1.01-.97 2-.58.85-1.18 1.69-2.13 1.71-.93.02-1.23-.55-2.29-.55s-1.4.53-2.28.57c-.92.04-1.62-.92-2.2-1.76-1.19-1.72-2.1-4.86-.88-6.98a3.4 3.4 0 0 1 2.85-1.73c.9-.02 1.74.61 2.29.61.54 0 1.56-.75 2.63-.64.45.02 1.72.18 2.54 1.37-.07.04-1.52.89-1.5 2.57ZM14.64 6.81a3.36 3.36 0 0 0 .76-2.4 3.42 3.42 0 0 0-2.2 1.14 3.18 3.18 0 0 0-.79 2.32 2.84 2.84 0 0 0 2.23-1.06Z"/>
+                            </svg>
+                            Sign up with Apple
+                        </button>
+                    </div>
+
+                    <p id="formMessage" class="mt-3 hidden text-center text-[10px] leading-4" role="status" aria-live="polite"></p>
+                    <p class="mt-3 text-center text-[10px] text-slate-500">
+                        Already have an account?
+                        <a href="../Sign in/index.html" class="font-semibold text-blue-600 hover:text-blue-800">Sign in</a>
+                    </p>
+                </form>
+            </section>
+
+            <section class="relative mx-auto mt-1 h-[340px] w-full max-w-[340px] overflow-hidden rounded-xl bg-slate-900 md:mt-0" aria-label="A note from our care team">
+                <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&amp;fit=crop&amp;w=900&amp;q=85" alt="Smiling doctor wearing a white coat" class="absolute inset-0 h-full w-full object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/10 to-transparent"></div>
+                <div class="absolute inset-x-0 bottom-0 p-4 text-white">
+                    <p class="text-[10px] leading-[1.65] text-white/90">Our experience with the support team was exceptional. They were responsive, friendly, and resolved our issue quickly. It's clear they genuinely care about their clients.</p>
+                    <p class="mt-3 text-[10px] font-semibold">Aliah Lane</p>
+                    <p class="mt-1 text-[8px] text-white/70">@shiatoken</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const signupForm = document.getElementById("signupForm");
+        const fullName = document.getElementById("fullName");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const formMessage = document.getElementById("formMessage");
+        const togglePassword = document.getElementById("togglePassword");
+
+        function showMessage(message, isError = false) {
+            formMessage.textContent = message;
+            formMessage.classList.remove("hidden", "text-rose-600", "text-emerald-700");
+            formMessage.classList.add(isError ? "text-rose-600" : "text-emerald-700");
+        }
+
+        togglePassword.addEventListener("click", () => {
+            const shouldShow = password.type === "password";
+            password.type = shouldShow ? "text" : "password";
+            togglePassword.setAttribute("aria-pressed", String(shouldShow));
+            togglePassword.setAttribute("aria-label", shouldShow ? "Hide password" : "Show password");
+        });
+
+        signupForm.addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            if (!fullName.value.trim()) {
+                showMessage("Please enter your full name.", true);
+                fullName.focus();
+                return;
+            }
+            if (!email.value.trim() || !email.validity.valid) {
+                showMessage("Please enter a valid email address.", true);
+                email.focus();
+                return;
+            }
+            if (password.value.length < 8) {
+                showMessage("Your password must be at least 8 characters.", true);
+                password.focus();
+                return;
+            }
+
+            showMessage("Your details are valid. Account creation is not connected in this demo.");
+        });
+
+        document.querySelectorAll("[data-provider]").forEach((button) => {
+            button.addEventListener("click", () => {
+                showMessage(`${button.dataset.provider} sign-up is not connected in this demo.`, true);
+            });
+        });
+    </script>
+</body>
+</html>

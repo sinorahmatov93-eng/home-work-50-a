@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medicare</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body{font-family:"DM Sans",sans-serif}
+    html{scroll-behavior:smooth;scroll-padding-top:85px}
+    .ticker-track{animation:slide 32s linear infinite}
+    @keyframes slide{to{transform:translateX(-50%)}}
+    .doctor-track{scrollbar-width:none}
+    .doctor-track::-webkit-scrollbar{display:none}
+    [hidden]{display:none!important}
+
+    .nav-link{font-size:12px;font-weight:700;color:#475569}
+    .nav-link:hover{color:#14b8a6}
+    .nav-link[aria-current="page"]{font-weight:800;color:#0d9488}
+    .section-label{font-size:10px;font-weight:800;letter-spacing:2px;color:#0d9488}
+    .section-title{margin-top:8px;font-size:clamp(23px,3vw,32px);font-weight:800;color:#173e43}
+    .section-subtitle{margin-top:8px;font-size:12px;color:#94a3b8}
+    .filter-btn{border:1px solid #ccfbf1;border-radius:999px;background:white;padding:9px 16px;font-size:10px;font-weight:700;color:#475569}
+    .active-filter{background:#14b8a6;color:white;border-color:#14b8a6}
+    .package-card{border:1px solid #f1f5f9;border-radius:12px;background:white;padding:20px;box-shadow:0 2px 8px #0f766e08;transition:.2s}
+    .package-card:hover{transform:translateY(-3px)}
+    .package-card h3{margin-top:12px;font-size:14px;font-weight:800;color:#1e293b}
+    .package-card p{margin-top:8px;font-size:12px;line-height:1.6;color:#64748b}
+    .package-card b{font-size:12px;color:#0d9488}
+    .package-card a{font-size:10px;font-weight:700;color:#0d9488}
+    .package-icon{display:grid;width:36px;height:36px;place-items:center;border-radius:9px;background:#f0fdfa;font-size:18px;color:#0d9488}
+    .care-tile{display:flex;min-height:220px;flex-direction:column;justify-content:space-between;border-radius:12px;padding:20px}
+    .care-tile>span{font-size:10px;font-weight:800}
+    .care-tile h3{font-size:20px;font-weight:800;line-height:1.2}
+    .care-tile p{margin-top:8px;font-size:12px;line-height:1.6;opacity:.7}
+    .doctor-card{width:47%;flex-shrink:0;scroll-snap-align:start;overflow:hidden;border-radius:12px;background:white;padding-bottom:16px;box-shadow:0 2px 10px #0f766e0c}
+    .doctor-card img{width:100%;height:160px;object-fit:cover;object-position:top}
+    .doctor-card h3{padding:12px 12px 0;font-size:12px;font-weight:800;color:#1e293b}
+    .doctor-card p{padding:4px 12px 0;font-size:10px;color:#0d9488}
+    .round-arrow{display:grid;width:36px;height:36px;place-items:center;border-radius:999px;background:#ccfbf1;font-size:14px;font-weight:700;color:#0f766e;cursor:pointer}
+    .price-card{border:1px solid #f1f5f9;border-radius:16px;background:white;padding:24px;box-shadow:0 2px 10px #0f766e08}
+    .price-card h3{margin-top:12px;font-size:20px;font-weight:800}
+    .price{margin-top:16px;font-size:36px;font-weight:800;color:#173e43}
+    .price small{font-size:12px;font-weight:400;color:#94a3b8}
+    .price-card ul{margin:20px 0;color:#64748b;font-size:12px}
+    .price-card li{margin:12px 0}
+    .price-button{display:block;border:1px solid #14b8a6;border-radius:9px;padding:12px;text-align:center;font-size:12px;font-weight:700;color:#0d9488}
+    .blog-card{overflow:hidden;border:1px solid #f1f5f9;border-radius:12px;background:white}
+    .blog-card img{width:100%;height:160px;object-fit:cover}
+    .blog-card div{padding:16px}
+    .blog-card span{font-size:9px;font-weight:800;letter-spacing:1px;color:#0d9488}
+    .blog-card h3{min-height:40px;margin:9px 0;font-size:14px;font-weight:800;line-height:1.5}
+    .blog-card a{font-size:10px;font-weight:700;color:#0d9488}
+    .form-label{font-size:12px;font-weight:700;color:#475569}
+    .form-label input,.form-label select{display:block;width:100%;margin-top:8px;border:1px solid #e2e8f0;border-radius:8px;background:white;padding:12px;font-size:13px;font-weight:400;outline:none}
+    .form-label input:focus,.form-label select:focus{border-color:#14b8a6}
+    .footer-link{display:block;padding:4px 0;font-size:12px;color:#ccfbf1b3}
+    .footer-link:hover{color:white}
+    .footer-text{padding:4px 0;font-size:12px;color:#ccfbf1b3}
+
+    @media(min-width:640px){.doctor-card{width:31%}}
+    @media(min-width:768px){
+      .doctor-card{width:calc(25% - 9px)}
+      .doctor-card img{height:190px}
+      .section-subtitle{font-size:14px}
+    }
+  </style>
+</head>
+
+<body class="bg-white text-slate-800">
+
+<!-- HEADER -->
+<header class="sticky top-0 z-50 border-b border-slate-100 bg-white/95 backdrop-blur">
+  <nav class="mx-auto flex h-[70px] max-w-6xl items-center justify-between px-5">
+
+    <a href="#home" class="flex items-center gap-2 text-xl font-extrabold text-slate-900">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-teal-100 text-xl text-teal-600">✚</span>
+      medicare
+    </a>
+
+    <div id="navMenu" class="absolute left-0 right-0 top-[70px] hidden flex-col gap-1 border-t bg-white p-5 shadow-lg lg:static lg:flex lg:max-w-[70%] lg:flex-row lg:items-center lg:gap-3 lg:overflow-x-auto lg:whitespace-nowrap lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none">
+      <a class="nav-link font-extrabold text-teal-600" href="index.html" aria-current="page">Home</a>
+      <a class="nav-link" href="pages/ABOU%20US/index.html">About Us</a>
+      <a class="nav-link" href="pages/Sign%20in/index.html">Sign In</a>
+      <a class="nav-link" href="pages/SIgn%20up/index.html">Sign Up</a>
+      <a class="nav-link" href="pages/Privacy%20policy/index.html">Privacy</a>
+      <a class="nav-link" href="pages/Terms%20of%20services/index.html">Terms</a>
+      <a class="nav-link" href="pages/Eror/index.html">Coming Soon</a>
+      <a class="nav-link" href="pages/Error/index.html">Not Found</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#packages">Packages</a>
+      <a class="nav-link" href="#doctors">Doctors</a>
+      <a class="nav-link" href="#blog">Blog</a>
+      <a href="#appointment" class="rounded-lg bg-teal-500 px-5 py-3 text-center text-xs font-bold text-white">Book Appointment</a>
+    </div>
+
+    <button id="menuToggle" class="rounded-lg p-2 text-2xl lg:hidden" aria-label="Toggle navigation">☰</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section id="home" class="mx-auto max-w-6xl px-5 pt-7">
+
+  <div class="relative min-h-[390px] overflow-hidden rounded-[22px] bg-gradient-to-r from-[#baf0e5] via-[#c9f3e9] to-[#7bd9c9] px-7 py-9 md:flex md:items-center md:px-14">
+
+    <div class="relative z-10 max-w-[540px] md:w-[58%]">
+      <span class="text-[10px] font-extrabold tracking-[2px] text-teal-700">WELCOME TO MEDICARE</span>
+
+      <h1 class="mt-3 text-[38px] font-extrabold leading-[1.05] tracking-tight text-[#123d43] sm:text-5xl md:text-[55px]">
+        Excellent healthcare
+        <br>
+        <span class="text-teal-600">for a better life.</span>
+      </h1>
+
+      <p class="mt-4 max-w-sm text-sm leading-6 text-teal-950/70">
+        Your health is our priority. Get trusted care from experienced specialists with modern medical technology.
+      </p>
+
+      <a href="#appointment" class="mt-5 inline-flex items-center gap-5 rounded-lg bg-[#123e43] px-5 py-3 text-xs font-bold text-white">
+        Book an appointment →
+      </a>
+    </div>
+
+    <div class="pointer-events-none absolute bottom-0 right-[4%] hidden h-[96%] w-[43%] md:block">
+      <img class="h-full w-full object-contain object-bottom"
+        src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=850&q=85"
+        alt="Doctor">
+    </div>
+
+    <div class="mt-5 flex items-center gap-3 rounded-xl bg-white/90 p-3 shadow-sm md:absolute md:bottom-6 md:right-7 md:mt-0">
+      <span class="grid h-9 w-9 place-items-center rounded-full bg-teal-100 text-lg text-teal-600">✚</span>
+      <span>
+        <b class="block text-xs text-slate-800">24/7 Medical Support</b>
+        <small class="text-[10px] text-slate-500">We are always here for you</small>
+      </span>
+    </div>
+
+    <img class="mt-5 h-48 w-full object-contain object-bottom md:hidden"
+      src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=650&q=85"
+      alt="Doctor">
+  </div>
+
+  <!-- THREE CARDS -->
+  <div class="mt-4 grid gap-3 md:grid-cols-3">
+
+    <article class="rounded-xl bg-[#ffe7e9] p-5">
+      <div class="flex items-center justify-between">
+        <span class="text-lg text-rose-500">♡</span>
+        <span class="text-xs text-rose-400">01</span>
+      </div>
+      <h2 class="mt-2 font-extrabold">Health is wealth</h2>
+      <p class="mt-1 text-xs leading-5 text-slate-600">Take care of your health with regular check-ups.</p>
+      <a href="#services" class="mt-3 inline-block rounded-full bg-[#173e43] px-4 py-2 text-[10px] font-bold text-white">Learn more →</a>
+    </article>
+
+    <article class="rounded-xl bg-[#ddf7f0] p-5">
+      <div class="flex items-center justify-between">
+        <span class="text-lg text-teal-600">✚</span>
+        <span class="text-xs text-teal-500">02</span>
+      </div>
+      <h2 class="mt-2 font-extrabold">Qualified doctors</h2>
+      <p class="mt-1 text-xs leading-5 text-slate-600">Experienced specialists ready to help you.</p>
+      <a href="#doctors" class="mt-3 inline-block rounded-full bg-[#173e43] px-4 py-2 text-[10px] font-bold text-white">Meet our team →</a>
+    </article>
+
+    <article class="rounded-xl bg-[#fff2c9] p-5">
+      <div class="flex items-center justify-between">
+        <span class="text-lg text-amber-600">⌖</span>
+        <span class="text-xs text-amber-500">03</span>
+      </div>
+      <h2 class="mt-2 font-extrabold">Easy appointments</h2>
+      <p class="mt-1 text-xs leading-5 text-slate-600">Choose a convenient time for your visit.</p>
+      <a href="#appointment" class="mt-3 inline-block rounded-full bg-[#173e43] px-4 py-2 text-[10px] font-bold text-white">Book now →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- MOVING TEXT -->
+<div class="mt-9 overflow-hidden border-y border-slate-100 py-4">
+  <div class="ticker-track flex w-max items-center gap-9 text-[11px] font-bold text-slate-500">
+    <span>✚ General Medicine</span>
+    <span>♡ Cardiology</span>
+    <span>✚ Dentistry</span>
+    <span>♡ Pediatrics</span>
+    <span>✚ Neurology</span>
+    <span>♡ Laboratory</span>
+    <span>✚ Eye Care</span>
+    <span>♡ Dermatology</span>
+    <span>✚ General Medicine</span>
+    <span>♡ Cardiology</span>
+    <span>✚ Dentistry</span>
+    <span>♡ Pediatrics</span>
+    <span>✚ Neurology</span>
+    <span>♡ Laboratory</span>
+    <span>✚ Eye Care</span>
+    <span>♡ Dermatology</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services" class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+
+  <div class="mb-8 text-center">
+    <span class="section-label">WHAT WE DO</span>
+    <h2 class="section-title">Our health analysis solutions</h2>
+    <p class="section-subtitle">Modern healthcare services designed around you and your family.</p>
+  </div>
+
+  <div class="grid grid-cols-2 gap-3 md:grid-cols-4 md:grid-rows-2">
+
+    <article class="relative col-span-2 row-span-1 flex min-h-[210px] overflow-hidden rounded-xl bg-[#65d1bd] p-5 text-white md:row-span-2 md:min-h-[320px] md:p-7">
+
+      <div class="relative z-10 max-w-[65%]">
+        <span class="text-[9px] font-bold tracking-widest">01 / HEALTH CHECK</span>
+        <h3 class="mt-3 text-2xl font-extrabold leading-tight">Complete health<br>check-up</h3>
+        <p class="mt-3 text-xs leading-5">A clear picture of your health with professional support.</p>
+        <a href="#appointment" class="mt-4 inline-block rounded-full bg-[#173e43] px-4 py-2 text-[10px] font-bold">Explore service →</a>
+      </div>
+
+      <img class="absolute bottom-0 right-0 h-full w-[43%] object-cover opacity-80"
+        src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=650&q=80"
+        alt="Doctor consultation">
+    </article>
+
+    <img class="h-[150px] w-full rounded-xl object-cover md:h-full"
+      src="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=650&q=80"
+      alt="Medical laboratory">
+
+    <article class="flex min-h-[150px] flex-col justify-center rounded-xl bg-[#1688c5] p-4 text-white">
+      <span class="text-[9px] font-bold tracking-widest">02 / LAB TESTS</span>
+      <h3 class="mt-2 text-lg font-extrabold">Accurate test results</h3>
+      <p class="mt-2 text-[11px] leading-5">Modern equipment and careful analysis.</p>
+      <a href="#appointment" class="mt-2 text-[10px] font-bold">Learn more →</a>
+    </article>
+
+    <img class="h-[150px] w-full rounded-xl object-cover md:h-full"
+      src="https://images.unsplash.com/photo-1584982751601-97dcc096659c?auto=format&fit=crop&w=650&q=80"
+      alt="Medical professional">
+
+    <article class="flex min-h-[150px] flex-col justify-center rounded-xl bg-[#dff6f1] p-4">
+      <span class="text-[9px] font-bold tracking-widest text-teal-700">03 / PERSONAL CARE</span>
+      <h3 class="mt-2 text-lg font-extrabold text-[#173e43]">Care made for you</h3>
+      <p class="mt-2 text-[11px] leading-5 text-slate-600">A friendly team focused on your wellbeing.</p>
+      <a href="#doctors" class="mt-2 text-[10px] font-bold text-teal-700">Meet our team →</a>
+    </article>
+
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="packages" class="bg-[#f4faf8] py-16 md:py-20">
+
+  <div class="mx-auto max-w-6xl px-5">
+
+    <div class="mb-7 text-center">
+      <span class="section-label">OUR SPECIALTIES</span>
+      <h2 class="section-title">Exclusive Health Check-up Packages</h2>
+      <p class="section-subtitle">Find the right check-up package for your needs.</p>
+    </div>
+
+    <div class="mb-6 flex flex-wrap justify-center gap-2">
+      <button class="filter-btn active-filter" data-filter="all">All packages</button>
+      <button class="filter-btn" data-filter="basic">Basic care</button>
+      <button class="filter-btn" data-filter="heart">Heart care</button>
+      <button class="filter-btn" data-filter="family">Family care</button>
+      <button class="filter-btn" data-filter="premium">Premium</button>
+    </div>
+
+    <div id="packageCards" class="grid gap-3 md:grid-cols-3">
+
+      <article class="package-card" data-category="basic">
+        <span class="package-icon">♡</span>
+        <h3>Basic Health Check</h3>
+        <p>Essential tests and a general consultation.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $35</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+      <article class="package-card" data-category="heart">
+        <span class="package-icon">♥</span>
+        <h3>Heart Health Check</h3>
+        <p>Heart screening and specialist guidance.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $50</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+      <article class="package-card" data-category="family">
+        <span class="package-icon">✚</span>
+        <h3>Family Check-up</h3>
+        <p>Health support for the whole family.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $75</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+      <article class="package-card" data-category="premium">
+        <span class="package-icon">✦</span>
+        <h3>Premium Screening</h3>
+        <p>A more detailed health assessment.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $99</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+      <article class="package-card" data-category="basic">
+        <span class="package-icon">⌖</span>
+        <h3>Women's Health</h3>
+        <p>Personalized preventive health support.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $45</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+      <article class="package-card" data-category="family">
+        <span class="package-icon">☼</span>
+        <h3>Child Health</h3>
+        <p>Friendly care for growing children.</p>
+        <div class="mt-4 flex items-center justify-between">
+          <b>From $40</b>
+          <a href="#appointment">Details →</a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHY CHOOSE US -->
+<section class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+
+  <div class="mb-8 text-center">
+    <span class="section-label">WHY CHOOSE US</span>
+    <h2 class="section-title">Personalized care with cutting-edge<br class="hidden md:block"> healthcare solutions</h2>
+    <p class="section-subtitle">We combine medical experience with a warm and personal approach.</p>
+  </div>
+
+  <div class="grid gap-3 md:grid-cols-4">
+
+    <img class="h-56 w-full rounded-xl object-cover md:h-full"
+      src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=700&q=85"
+      alt="Doctor checking patient">
+
+    <article class="care-tile bg-[#dff7f1]">
+      <span>01</span>
+      <div>
+        <h3>Experienced specialists</h3>
+        <p>Skilled doctors who listen and care.</p>
+      </div>
+    </article>
+
+    <article class="care-tile bg-[#ffe8e9]">
+      <span>02</span>
+      <div>
+        <h3>Modern technology</h3>
+        <p>Reliable equipment for better care.</p>
+      </div>
+    </article>
+
+    <article class="care-tile bg-[#173e43] text-white">
+      <span>03</span>
+      <div>
+        <h3>Care for everyone</h3>
+        <p>Your comfort and wellbeing matter to us.</p>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section id="doctors" class="bg-[#f4faf8] py-16 md:py-20">
+
+  <div class="mx-auto max-w-6xl px-5">
+
+    <div class="mb-8 text-center">
+      <span class="section-label">OUR MEDICAL TEAM</span>
+      <h2 class="section-title">Designed for skilled specialists<br class="hidden md:block"> leading in healthcare excellence</h2>
+      <p class="section-subtitle">Meet our caring and experienced medical team.</p>
+    </div>
+
+    <div class="relative">
+
+      <div id="doctorTrack" class="doctor-track flex snap-x snap-mandatory gap-3 overflow-x-auto pb-3">
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. James Wilson</h3>
+          <p>Cardiologist</p>
+        </article>
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. Sarah Miller</h3>
+          <p>Pediatrician</p>
+        </article>
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. David Brown</h3>
+          <p>Neurologist</p>
+        </article>
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. Emily Taylor</h3>
+          <p>Dermatologist</p>
+        </article>
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1622902046580-2b47f47f5471?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. Robert Lee</h3>
+          <p>Surgeon</p>
+        </article>
+
+        <article class="doctor-card">
+          <img src="https://images.unsplash.com/photo-1614608691198-3b6d4f8f1e91?auto=format&fit=crop&w=450&q=80" alt="Doctor">
+          <h3>Dr. Anna Green</h3>
+          <p>Therapist</p>
+        </article>
+
+      </div>
+
+      <div class="mt-3 flex justify-center gap-2">
+        <button id="doctorPrev" class="round-arrow">←</button>
+        <button id="doctorNext" class="round-arrow">→</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section class="mx-auto grid max-w-5xl items-center gap-8 px-5 py-16 md:grid-cols-2 md:py-20">
+
+  <div class="mx-auto flex h-[270px] w-full max-w-[330px] items-end justify-center overflow-hidden rounded-2xl bg-[#dff7f1]">
+    <img class="h-full w-full object-cover object-top"
+      src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=600&q=85"
+      alt="Medical expert">
+  </div>
+
+  <div>
+    <span class="section-label">MEET OUR EXPERT</span>
+    <h2 class="mt-3 text-3xl font-extrabold leading-tight text-[#173e43]">What Patients Are Saying About Dr. Michael</h2>
+
+    <p id="reviewText" class="my-5 text-sm leading-7 text-slate-500">
+      “The team made me feel comfortable from the first visit. Everything was explained clearly, and the care was excellent.”
+    </p>
+
+    <b id="reviewAuthor" class="block text-sm">Michael Anderson</b>
+    <small class="text-xs text-slate-400">Patient review</small>
+
+    <div class="mt-5 flex gap-2">
+      <button id="reviewPrev" class="round-arrow">←</button>
+      <button id="reviewNext" class="round-arrow">→</button>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" class="bg-[#f4faf8] py-16 md:py-20">
+
+  <div class="mx-auto max-w-4xl px-5">
+
+    <div class="mb-8 text-center">
+      <span class="section-label">SIMPLE PRICING</span>
+      <h2 class="section-title">Choose your pricing plan</h2>
+      <p class="section-subtitle">Straightforward plans for your healthcare needs.</p>
+    </div>
+
+    <div class="grid gap-4 md:grid-cols-2">
+
+      <article class="price-card">
+        <span class="section-label">BASIC PLAN</span>
+        <h3>Starter Care</h3>
+        <div class="price">$29 <small>/ visit</small></div>
+
+        <ul>
+          <li>✓ General consultation</li>
+          <li>✓ Basic health check</li>
+          <li>✓ Online support</li>
+          <li>✓ Personal recommendations</li>
+        </ul>
+
+        <a href="#appointment" class="price-button">Choose plan</a>
+      </article>
+
+      <article class="price-card bg-[#173e43] text-white">
+        <span class="text-[10px] font-extrabold tracking-widest text-teal-300">MOST POPULAR</span>
+        <h3>Premium Care</h3>
+        <div class="price text-teal-200">$59 <small>/ visit</small></div>
+
+        <ul>
+          <li>✓ Everything in Starter</li>
+          <li>✓ Specialist consultation</li>
+          <li>✓ Advanced check-up</li>
+          <li>✓ Priority appointment</li>
+        </ul>
+
+        <a href="#appointment" class="price-button bg-teal-400 text-[#173e43]">Choose plan →</a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog" class="mx-auto max-w-6xl px-5 py-16 md:py-20">
+
+  <div class="mb-8 text-center">
+    <span class="section-label">LATEST NEWS</span>
+    <h2 class="section-title">Health, wellbeing & insights</h2>
+    <p class="section-subtitle">Helpful ideas for a healthier everyday life.</p>
+  </div>
+
+  <div class="grid gap-4 md:grid-cols-3">
+
+    <article class="blog-card">
+      <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=650&q=80" alt="Health care">
+      <div>
+        <span>HEALTH TIPS · 5 MIN READ</span>
+        <h3>Small habits that make a big difference</h3>
+        <a href="#appointment">Read article →</a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=650&q=80" alt="Doctor">
+      <div>
+        <span>MEDICAL · 4 MIN READ</span>
+        <h3>Why regular check-ups are important</h3>
+        <a href="#appointment">Read article →</a>
+      </div>
+    </article>
+
+    <article class="blog-card">
+      <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=650&q=80" alt="Healthy lifestyle">
+      <div>
+        <span>WELLNESS · 6 MIN READ</span>
+        <h3>Easy ways to care for your wellbeing</h3>
+        <a href="#appointment">Read article →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- APPOINTMENT -->
+<section id="appointment" class="mx-auto max-w-6xl px-5 pb-16">
+
+  <div class="grid gap-6 overflow-hidden rounded-2xl bg-[#65d1bd] p-6 md:grid-cols-2 md:items-center md:p-10">
+
+    <div>
+      <span class="text-[10px] font-extrabold tracking-widest text-teal-900">YOUR HEALTH MATTERS</span>
+      <h2 class="mt-3 text-3xl font-extrabold leading-tight text-[#123e43] md:text-4xl">Schedule your appointment with us.</h2>
+      <p class="mt-3 max-w-sm text-sm text-teal-950/70">Choose a convenient time and let our team help you take care of your health.</p>
+      <a href="#bookingForm" class="mt-5 inline-block rounded-full bg-[#173e43] px-5 py-3 text-xs font-bold text-white">Book a visit →</a>
+    </div>
+
+    <div class="rounded-xl bg-white p-4 shadow-sm">
+
+      <div class="flex items-center justify-between">
+        <b class="text-sm">Available appointments</b>
+        <span class="rounded-full bg-teal-50 px-3 py-1 text-[10px] font-bold text-teal-600">This week</span>
+      </div>
+
+      <div class="mt-4 grid grid-cols-4 gap-2 text-center text-[10px]">
+        <div class="rounded-lg bg-teal-50 p-3"><b>MON</b><p class="mt-2 text-lg font-bold">10</p></div>
+        <div class="rounded-lg bg-teal-50 p-3"><b>TUE</b><p class="mt-2 text-lg font-bold">11</p></div>
+        <div class="rounded-lg bg-teal-500 p-3 text-white"><b>WED</b><p class="mt-2 text-lg font-bold">12</p></div>
+        <div class="rounded-lg bg-teal-50 p-3"><b>THU</b><p class="mt-2 text-lg font-bold">13</p></div>
+      </div>
+
+      <div class="mt-3 grid grid-cols-3 gap-2">
+        <span class="rounded-lg bg-slate-50 p-2 text-center text-[10px]">09:00 AM</span>
+        <span class="rounded-lg bg-slate-50 p-2 text-center text-[10px]">11:30 AM</span>
+        <span class="rounded-lg bg-slate-50 p-2 text-center text-[10px]">02:00 PM</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING FORM -->
+<section class="mx-auto max-w-3xl px-5 pb-16">
+
+  <form id="bookingForm" class="grid gap-3 rounded-2xl border border-slate-100 bg-white p-5 shadow-sm sm:grid-cols-2">
+
+    <label class="form-label">
+      Your name
+      <input id="customerName" required placeholder="Enter your name">
+    </label>
+
+    <label class="form-label">
+      Phone number
+      <input id="customerPhone" type="tel" required placeholder="+992 ...">
+    </label>
+
+    <label class="form-label sm:col-span-2">
+      Service
+      <select id="customerService">
+        <option>General check-up</option>
+        <option>Heart screening</option>
+        <option>Family package</option>
+        <option>Premium care</option>
+      </select>
+    </label>
+
+    <button class="rounded-lg bg-[#173e43] px-5 py-3 text-xs font-bold text-white sm:col-span-2" type="submit">
+      Send appointment request →
+    </button>
+
+    <p id="bookingMessage" class="text-xs text-teal-700 sm:col-span-2"></p>
+
+  </form>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-[#12383d] py-12 text-white">
+
+  <div class="mx-auto grid max-w-6xl grid-cols-2 gap-7 px-5 md:grid-cols-4">
+
+    <div class="col-span-2 md:col-span-1">
+      <a href="#home" class="text-xl font-extrabold">✚ medicare</a>
+      <p class="mt-3 max-w-[190px] text-xs leading-6 text-teal-100/70">Modern healthcare with a personal touch.</p>
+    </div>
+
+    <div>
+      <h3 class="mb-3 text-sm font-bold">Quick links</h3>
+      <a class="footer-link" href="#services">Services</a>
+      <a class="footer-link" href="#doctors">Doctors</a>
+      <a class="footer-link" href="#pricing">Pricing</a>
+    </div>
+
+    <div>
+      <h3 class="mb-3 text-sm font-bold">Contact us</h3>
+      <p class="footer-text">+992 900 00 00 00</p>
+      <p class="footer-text">hello@medicare.example</p>
+      <p class="footer-text">Dushanbe, Tajikistan</p>
+    </div>
+
+    <div>
+      <h3 class="mb-3 text-sm font-bold">Opening hours</h3>
+      <p class="footer-text">Mon – Fri: 8:00 – 18:00</p>
+      <p class="footer-text">Saturday: 9:00 – 14:00</p>
+      <p class="footer-text">Sunday: Closed</p>
+    </div>
+
+  </div>
+
+  <p class="mt-9 border-t border-white/10 pt-5 text-center text-[10px] text-teal-100/60">
+    © 2026 Medicare. All rights reserved.
+  </p>
+
+</footer>
+
+<script src="script.js"></script>
+</body>
+
+</html>
